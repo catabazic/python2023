@@ -168,19 +168,109 @@ def find_palindromes(numbers):
 # Example usage
 numbers = [121, 1331, 123, 454, 1001, 987]
 num_palindromes, greatest_palindrome = find_palindromes(numbers)
-print(f"Number of palindromes: {num_palindromes}")
-print(f"Greatest palindrome number: {greatest_palindrome}")
+# print(f"Number of palindromes: {num_palindromes}")
+# print(f"Greatest palindrome number: {greatest_palindrome}")
 
 # -------------------------------Exercitiul 8
 
+def process_strings(x=1, strings=[], flag=True):
+    result_lists = []
+
+    for string in strings:
+        filtered_chars = []
+        for char in string:
+            ascii_code = ord(char)
+            if (ascii_code % x == 0) if flag else (ascii_code % x != 0):
+                filtered_chars.append(char)
+        result_lists.append(filtered_chars)
+
+    return result_lists
+
+
+# Example usage:
+x = 2
+strings = ["test", "hello", "lab002"]
+flag = True
+result = process_strings(x, strings, flag)
+# print(result)
 
 # -------------------------------Exercitiul 9
+
+def find_unsatisfied_spectators(matrix):
+    unsatisfied_spectators = []
+
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            height = matrix[i][j]
+            can_see_game = True
+            for k in range(i):
+                if matrix[k][j] >= height:
+                    can_see_game = False
+                    break
+            if not can_see_game:
+                unsatisfied_spectators.append((i, j))
+    return unsatisfied_spectators
+
+# Example usage:
+matrix = [[1, 2, 3, 2, 1, 1],
+          [2, 4, 4, 3, 7, 2],
+          [5, 5, 2, 5, 6, 4],
+          [6, 6, 7, 6, 7, 5]]
+
+unsatisfied_spectators = find_unsatisfied_spectators(matrix)
+# print(unsatisfied_spectators)
 
 
 # -------------------------------Exercitiul 10
 
+def zip_lists(*args):
+    max_length = max(len(lst) for lst in args)
+    zipped_tuples = []
+
+    for i in range(max_length):
+        zipped_tuple = tuple(lst[i] if i < len(lst) else None for lst in args)
+        zipped_tuples.append(zipped_tuple)
+
+    return zipped_tuples
+
+# Example usage:
+list1 = [1, 2, 3]
+list2 = [5, 6, 7]
+list3 = ["a", "b", "c"]
+
+result = zip_lists(list1, list2, list3)
+# print(result)
+
 
 # -------------------------------Exercitiul 11
 
+def sort_tuples(input_list):
+    sorted_list = sorted(input_list, key=lambda x: x[1][2])
+    return sorted_list
+
+# Example usage:
+input_list = [('abc', 'bcd'), ('abc', 'zza')]
+sorted_result = sort_tuples(input_list)
+# print(sorted_result)
+
 
 # -------------------------------Exercitiul 12
+
+def group_by_rhyme(words):
+    rhymes_dict = {}
+
+    for word in words:
+        rhyme_key = word[-2:]
+        if rhyme_key in rhymes_dict:
+            rhymes_dict[rhyme_key].append(word)
+        else:
+            rhymes_dict[rhyme_key] = [word]
+
+    grouped_rhymes = rhymes_dict.values()
+    return grouped_rhymes
+
+
+# Example usage:
+words = ['ana', 'banana', 'carte', 'arme', 'parte']
+result = group_by_rhyme(words)
+print(result)
