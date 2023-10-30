@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 # -------------------------------Exercitiul 1
 def Fibonaci(n: int):
     if n <= 0:
@@ -122,8 +125,6 @@ result_matrix = zero_below_diagonal(input_matrix)
 # print(result_matrix[0],"\n",result_matrix[1],"\n",result_matrix[2])
 
 # -------------------------------Exercitiul 6
-
-from collections import Counter
 
 
 def find_items_with_x_occurrences(x, *args):
