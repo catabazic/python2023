@@ -1,8 +1,4 @@
-
-
-
-
-#-----------------------------------------Exercitiul 1
+# -----------------------------------------Exercitiul 1
 
 class Stack:
     def __init__(self):
@@ -46,8 +42,7 @@ class Stack:
 # print("Is stack empty?", stack.is_empty())  # Output: False
 
 
-
-#-----------------------------------------Exercitiul 2
+# -----------------------------------------Exercitiul 2
 
 class Queue:
     def __init__(self):
@@ -91,8 +86,7 @@ class Queue:
 # print("Is queue empty?", queue.is_empty())  # Output: False
 
 
-
-#-----------------------------------------Exercitiul 3
+# -----------------------------------------Exercitiul 3
 
 
 class Matrix:
@@ -138,6 +132,7 @@ class Matrix:
     def __str__(self):
         return '\n'.join(['\t'.join(map(str, row)) for row in self.matrix])
 
+
 # Example usage of the Matrix class
 matrix = Matrix(2, 3)
 matrix.set(0, 0, 1)
@@ -160,7 +155,6 @@ print(matrix)
 matrix.apply_function(lambda x: x ** 2)
 print("Matrix after applying transformation function:")
 print(matrix)
-
 
 # Example of matrix multiplication
 matrix2 = Matrix(2, 3)
