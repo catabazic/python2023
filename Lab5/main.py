@@ -1,5 +1,4 @@
-
-#---------------------------------- Execrcitiul 1
+# ---------------------------------- Execrcitiul 1
 
 import math
 
@@ -48,7 +47,8 @@ class Triangle(Shape):
     def perimeter(self):
         return self.side1 + self.side2 + self.side3
 
-#---------------------------------- Execrcitiul 2
+
+# ---------------------------------- Execrcitiul 2
 
 class Account:
     def __init__(self, account_number, account_holder, balance=0.0):
@@ -71,7 +71,8 @@ class Account:
             print("Invalid withdrawal amount or insufficient funds.")
 
     def calculate_interest(self):
-        pass  # To be implemented by subclasses
+        pass
+
 
 class SavingsAccount(Account):
     def __init__(self, account_number, account_holder, balance=0.0, interest_rate=0.01):
@@ -82,6 +83,7 @@ class SavingsAccount(Account):
         interest = self.balance * self.interest_rate
         self.deposit(interest)
         print(f"Interest of ${interest} credited to the account.")
+
 
 class CheckingAccount(Account):
     def __init__(self, account_number, account_holder, balance=0.0, overdraft_limit=100.0):
@@ -96,10 +98,7 @@ class CheckingAccount(Account):
             print("Invalid withdrawal amount or overdraft limit exceeded.")
 
 
-
-
-
-#---------------------------------- Execrcitiul 3
+# ---------------------------------- Execrcitiul 3
 
 class Vehicle:
     def __init__(self, make, model, year):
@@ -111,7 +110,8 @@ class Vehicle:
         print(f"{self.year} {self.make} {self.model}")
 
     def calculate_mileage(self):
-        pass  # To be implemented by subclasses
+        pass
+
 
 class Car(Vehicle):
     def __init__(self, make, model, year, fuel_efficiency):
@@ -121,6 +121,7 @@ class Car(Vehicle):
     def calculate_mileage(self, distance):
         return distance / self.fuel_efficiency
 
+
 class Motorcycle(Vehicle):
     def __init__(self, make, model, year, fuel_efficiency):
         super().__init__(make, model, year)
@@ -128,6 +129,7 @@ class Motorcycle(Vehicle):
 
     def calculate_mileage(self, distance):
         return distance / self.fuel_efficiency
+
 
 class Truck(Vehicle):
     def __init__(self, make, model, year, towing_capacity):
@@ -138,7 +140,7 @@ class Truck(Vehicle):
         return f"{self.towing_capacity} pounds"
 
 
-#---------------------------------- Execrcitiul 4
+# ---------------------------------- Execrcitiul 4
 
 class Employee:
     def __init__(self, name, employee_id):
@@ -149,7 +151,8 @@ class Employee:
         print(f"Employee ID: {self.employee_id}\nName: {self.name}")
 
     def calculate_salary(self):
-        pass  # To be implemented by subclasses
+        pass
+
 
 class Manager(Employee):
     def __init__(self, name, employee_id, salary, bonus):
@@ -164,6 +167,7 @@ class Manager(Employee):
     def calculate_salary(self):
         return self.salary + self.bonus
 
+
 class Engineer(Employee):
     def __init__(self, name, employee_id, salary, technical_skill_level):
         super().__init__(name, employee_id)
@@ -177,6 +181,7 @@ class Engineer(Employee):
     def calculate_salary(self):
         return self.salary + (self.technical_skill_level * 1000)
 
+
 class Salesperson(Employee):
     def __init__(self, name, employee_id, salary, commission_rate, sales_amount):
         super().__init__(name, employee_id)
@@ -186,13 +191,14 @@ class Salesperson(Employee):
 
     def display_info(self):
         super().display_info()
-        print(f"Position: Salesperson\nSalary: ${self.salary}\nCommission Rate: {self.commission_rate}%\nSales Amount: ${self.sales_amount}")
+        print(
+            f"Position: Salesperson\nSalary: ${self.salary}\nCommission Rate: {self.commission_rate}%\nSales Amount: ${self.sales_amount}")
 
     def calculate_salary(self):
         return self.salary + (self.commission_rate / 100 * self.sales_amount)
 
 
-#---------------------------------- Execrcitiul 5
+# ---------------------------------- Execrcitiul 5
 
 class Animal:
     def __init__(self, name, habitat):
@@ -200,10 +206,11 @@ class Animal:
         self.habitat = habitat
 
     def make_sound(self):
-        pass  # To be implemented by subclasses
+        pass
 
     def move(self):
         print(f"{self.name} is moving.")
+
 
 class Mammal(Animal):
     def __init__(self, name, habitat, fur_color):
@@ -216,6 +223,7 @@ class Mammal(Animal):
     def make_sound(self):
         print(f"{self.name} makes mammal sounds.")
 
+
 class Bird(Animal):
     def __init__(self, name, habitat, feather_color):
         super().__init__(name, habitat)
@@ -226,6 +234,7 @@ class Bird(Animal):
 
     def make_sound(self):
         print(f"{self.name} sings a bird song.")
+
 
 class Fish(Animal):
     def __init__(self, name, habitat, scale_color):
@@ -239,8 +248,7 @@ class Fish(Animal):
         print(f"{self.name} makes bubbling sounds.")
 
 
-
-#---------------------------------- Execrcitiul 6
+# ---------------------------------- Execrcitiul 6
 
 class LibraryItem:
     def __init__(self, title, item_id, is_checked_out=False):
@@ -265,6 +273,7 @@ class LibraryItem:
         else:
             print(f"{self.title} is not checked out.")
 
+
 class Book(LibraryItem):
     def __init__(self, title, item_id, author, num_pages, is_checked_out=False):
         super().__init__(title, item_id, is_checked_out)
@@ -274,6 +283,7 @@ class Book(LibraryItem):
     def display_info(self):
         super().display_info()
         print(f"Author: {self.author}\nNumber of Pages: {self.num_pages}")
+
 
 class DVD(LibraryItem):
     def __init__(self, title, item_id, director, runtime, is_checked_out=False):
@@ -285,6 +295,7 @@ class DVD(LibraryItem):
         super().display_info()
         print(f"Director: {self.director}\nRuntime: {self.runtime} minutes")
 
+
 class Magazine(LibraryItem):
     def __init__(self, title, item_id, issue_date, is_checked_out=False):
         super().__init__(title, item_id, is_checked_out)
@@ -293,7 +304,3 @@ class Magazine(LibraryItem):
     def display_info(self):
         super().display_info()
         print(f"Issue Date: {self.issue_date}")
-
-
-
-
