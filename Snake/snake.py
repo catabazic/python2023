@@ -29,12 +29,24 @@ class button():
     height = 45
 
     def __init__(self, x, y, text):
+        """
+        Initializarea clasei
+
+        :param x: coordonatul x pentur buton, de unde incepe
+        :param y: coordonatul y pentru buton, de unde incepe
+        :param text: textul care va fi afisat pe buton
+        """
         self.x = x
         self.y = y
         self.text = text
 
     def draw_button(self):
+        """
+        Functia afiseaza butonul pe ecran si verifica daca a fost apasat sau nu
 
+        :return:  True - in caz ca butonul a fpst apasat
+                  False - in caz contrar
+        """
         global clicked
         action = False
 
@@ -76,16 +88,25 @@ class button():
 
 class Game:
     def __init__(self):
+        """
+        Initializarea clasei
+        """
         self.snake = Snake()
         self.fruit = Fruit()
         self.check_fruit()
 
     def update(self):
+        """
+        La fiecare iteratie updateaza datele care vor fi afisate
+        """
         self.snake.move_snake()
         self.check_eat_fruit()
         self.check_game_over()
 
     def draw_elements(self):
+        """
+        Afiseaza toate elementele pe ecran
+        """
         self.draw_grass()
         self.snake.draw_snake()
         self.fruit.draw_fruit()
@@ -93,6 +114,9 @@ class Game:
         self.draw_obstacles()
 
     def draw_grass(self):
+        """
+        Functie pentru desenarea tablei de joc
+        """
         ok = 0
         for col in range(table_dimension):
             if table_dimension % 2 == 0:
@@ -111,6 +135,9 @@ class Game:
                     ok = 0
 
     def draw_obstacles(self):
+        """
+        Deseneaza toate obstacolele care sunt permise de dimensiunea tablei
+        """
         global obstacles
         for obstacle in obstacles:
             if 0 <= obstacle['x'] < table_dimension - 1 and 0 <= obstacle['y'] < table_dimension and not ((obstacle[
@@ -126,6 +153,9 @@ class Game:
                 pygame.draw.rect(screen, pygame.Color('black'), fruit_rect)
 
     def draw_score(self):
+        """
+        Afiseaza scorul prezent si scorul cel mai bun
+        """
         global best_sore
         if len(self.snake.body) - 3 > int(best_sore):
             best_sore = str(len(self.snake.body) - 3)
@@ -160,12 +190,18 @@ class Game:
         screen.blit(score_surface, score_rect)
 
     def check_eat_fruit(self):
+        """
+        Verifica daca sarpele nu a mancat fructul
+        """
         if self.fruit.pos == self.snake.body[0]:
             self.fruit.new_fruit()
             self.snake.level_up()
             self.check_fruit()
 
     def check_fruit(self):
+        """
+        Verifica daca noul frunct nu este pus peste sarpe, sau peste obstacol
+        """
         for block in self.snake.body[1:]:
             if self.fruit.pos == block:
                 self.fruit.new_fruit()
@@ -178,6 +214,9 @@ class Game:
                 break
 
     def check_game_over(self):
+        """
+        Verifica daca sarpele nu se mananca pe el insusi, nu da cu capul de marginea tablei sau de obstacol
+        """
         if not 0 <= self.snake.body[0].x < table_dimension or not 0 <= self.snake.body[0].y < table_dimension:
             self.game_over()
 
@@ -191,6 +230,9 @@ class Game:
                 self.game_over()
 
     def game_over(self):
+        """
+        Se termina jocul
+        """
         global game_while
         game_while = False
         main_game_over()
@@ -198,12 +240,18 @@ class Game:
 
 class Snake:
     def __init__(self):
+        """
+        Initializeaza clasa, creaza corpul sarpelui si directia by default e spre dreapta
+        """
         self.body = [Vector2(int(table_dimension / 2), int(table_dimension / 2)),
                      Vector2(int(table_dimension / 2 - 1), int(table_dimension / 2)),
                      Vector2(int(table_dimension / 2 - 2), int(table_dimension / 2))]
         self.direction = RIGHT
 
     def draw_snake(self):
+        """
+        Deseneaza sarpele
+        """
         body_rect = pygame.Rect(self.body[0].x * cell_size + 25, self.body[0].y * cell_size + 90, cell_size, cell_size)
         pygame.draw.rect(screen, (152, 251, 152), body_rect)
         for block in self.body[1:]:
@@ -211,29 +259,48 @@ class Snake:
             pygame.draw.rect(screen, pygame.Color('green'), body_rect)
 
     def move_snake(self):
+        """
+        Modifica pozitia sarpelui stergand ultimul element din acesta si adaugand unul in directia coresponzatoare
+        """
         body_copy = self.body[:-1]
         body_copy.insert(0, body_copy[0] + self.direction)
         self.body = body_copy[:]
 
     def level_up(self):
+        """
+        Adauga un nou element element catre corpul sarpelui
+        """
         self.body.insert(len(self.body), self.body[1])
 
 
 class Fruit:
     def __init__(self):
+        """
+        Initializarea fructului
+        """
         self.new_fruit()
 
     def draw_fruit(self):
+        """
+        Deseneaza fructul pe pozitia acestuia
+        """
         fruit_rect = pygame.Rect(self.pos.x * cell_size + 25, self.pos.y * cell_size + 90, cell_size, cell_size)
         pygame.draw.rect(screen, pygame.Color('red'), fruit_rect)
 
     def new_fruit(self):
+        """
+        Adauga coordonatele x si y in mod random pentru fruct
+        """
         self.x = random.randint(0, table_dimension - 1)
         self.y = random.randint(0, table_dimension - 1)
         self.pos = Vector2(self.x, self.y)
 
 
 def main_menu():
+    """
+    Meniul principal pentru joc
+    In timp ce jucatorul nu apasa pe Start, va ramane in meniu
+    """
     start = button(table_x * 2 / 6, 420, 'Start')
     quit_button = button(table_x * 4 / 6, 420, 'Quit!')
     while True:
@@ -269,6 +336,10 @@ def main_menu():
 
 
 def main_game():
+    """
+    Functia ce simuleaza jocul. La fiecare apasare a tastei de directie aceasta se schimba.
+    Jocul ruleaza pana jucatorul nu pierde sau nu iese voluntar din joc.
+    """
     good_buy = button(table_x / 2, table_y - 30, 'Quit?')
     while game_while:
         for event in pygame.event.get():
@@ -298,6 +369,9 @@ def main_game():
 
 
 def main_game_over():
+    """
+    Interfata dupa ce jucatorul pierde. Acesta are posibilitaea de a incepe un alt joc sau de a iesi.
+    """
     yes_button = button(table_x * 2 / 6, 420, 'Yes!')
     quit_button = button(table_x * 4 / 6, 420, 'Quit!')
     global game
@@ -356,6 +430,9 @@ def main_game_over():
 
 
 if __name__ == "__main__":
+    '''
+    Deschidem fisierul json pentru a extrage obstacolele si dimensiunea tablei.
+    '''
     if len(sys.argv) != 2:
         print("Usage: python snake.py <config_file.json>")
         sys.exit(1)
